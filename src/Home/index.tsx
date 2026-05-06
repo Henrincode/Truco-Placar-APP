@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import styles from './styles';
 import ButtonCalc from '@/Components/Buttons/CalcButton';
 import Input from '@/Components/Inputs';
@@ -8,6 +8,7 @@ import Placar from '@/Components/placar';
 import Team from '@/Components/Team';
 import TextoButton from '@/Components/Buttons/TextoButton';
 import ZerarButton from '@/Components/Buttons/ZerarButton';
+import CorrerBtn from '@/Components/Buttons/CorrerBtn';
 
 export default function App() {
 
@@ -25,10 +26,26 @@ export default function App() {
     const total = team === 'a' ? point + placarA : point + placarB
 
     if (total >= 12) {
-      team === 'a' ? setVitoriasA(vitoriasA + 1) : setVitoriasB(vitoriasB + 1)
-      setPoint(1)
-      setPlacarA(0)
-      setPlacarB(0)
+      Alert.alert(
+        "Fim da Partida",
+        `O time ${team === 'a' ? teamA : teamB} venceu! Deseja iniciar uma nova rodada?`,
+        [
+          {
+            text: "Cancelar",
+            style: "cancel"
+          },
+          {
+            text: "OK",
+            onPress: () => {
+              // 2. A lógica de resetar SÓ roda se clicar em OK
+              team === 'a' ? setVitoriasA(vitoriasA + 1) : setVitoriasB(vitoriasB + 1);
+              setPoint(1);
+              setPlacarA(0);
+              setPlacarB(0);
+            }
+          }
+        ]
+      );
     } else {
       team === 'a' ? setPlacarA(placarA + point) : setPlacarB(placarB + point)
       setPoint(1)
@@ -61,6 +78,7 @@ export default function App() {
   }
 
   function zerar() {
+    setPoint(1)
     setPlacarA(0)
     setPlacarB(0)
     setVitoriasA(0)
@@ -95,18 +113,16 @@ export default function App() {
       </View>
 
       {/* button pedir truco! */}
+
       <View style={styles.row}>
-        <TextoButton onPress={truco} texto='Pedir truco' />
+        <TextoButton onPress={truco} texto='♣️ Pedir truco ♣️' />
       </View>
-      {point > 1 ? (
-        <View style={styles.row}>
-          <TextoButton onPress={correu} texto='Correu' />
-        </View>
-      ) : (
-        <View style={styles.row}>
-          <ZerarButton onPress={zerar} texto='Zerar tudo' />
-        </View>
-      )}
+      <View style={styles.row}>
+        <CorrerBtn ocultar={point < 2} onPress={correu} texto={`🦆 Correu 🦆`} />
+      </View>
+      <View style={styles.row}>
+        <ZerarButton onPress={zerar} texto='Zerar tudo' />
+      </View>
     </View>
   );
 }
