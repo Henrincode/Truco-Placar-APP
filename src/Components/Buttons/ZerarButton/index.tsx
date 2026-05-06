@@ -1,0 +1,14 @@
+import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
+import styles from "./styles";
+
+interface Props extends TouchableOpacityProps {
+    texto: string
+}
+
+export default function ZerarButton({texto, ...rest}: Props) {
+    return (
+        <TouchableOpacity {...rest} style={styles.container}>
+            <Text style={[styles.texto]}>{texto}</Text>
+        </TouchableOpacity>
+    )
+}
