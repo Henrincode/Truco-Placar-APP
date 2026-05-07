@@ -1,8 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import styles from './styles';
 import ButtonCalc from '@/Components/Buttons/CalcButton';
-import Input from '@/Components/Inputs';
 import { useEffect, useState } from 'react';
 import Placar from '@/Components/placar';
 import Team from '@/Components/Team';
@@ -63,7 +61,7 @@ export default function App() {
 
     loadAllSounds();
 
-    // Cleanup: Descarrega todos os sons ao desmontar o componente
+    // Descarrega todos os sons ao desmontar o componente
     return () => {
       Object.values(sounds).forEach(s => s.unloadAsync());
     };
@@ -97,7 +95,6 @@ export default function App() {
             text: "OK",
             onPress: () => {
               playSound('vitoria')
-              // 2. A lógica de resetar SÓ roda se clicar em OK
               team === 'a' ? setVitoriasA(vitoriasA + 1) : setVitoriasB(vitoriasB + 1)
               setPoint(1)
               setPlacarA(0)
@@ -151,39 +148,49 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+
+      {/* header */}
       <Text style={styles.h1}>♦️ TRUCO ♦️</Text>
 
+      {/* contadores de vitórias */}
       <View style={styles.row}>
         <Team nome={teamA} setNome={setTeamA} vitorias={vitoriasA} />
         <Team nome={teamB} setNome={setTeamB} vitorias={vitoriasB} />
       </View>
+
+      {/* contadores de placares */}
       <View style={styles.row}>
         <Placar tittle={placarA} />
         <Placar tittle={placarB} />
       </View>
 
-      {/* buttons container */}
+      {/* botões + - container */}
       <View style={styles.buttonsContainer}>
-        {/* buttons list */}
+
+        {/* botões placar + */}
         <View style={styles.row}>
           <ButtonCalc onPress={() => addPonto('a')} tittle={`+ ${point}`} />
           <ButtonCalc onPress={() => addPonto('b')} tittle={`+ ${point}`} />
         </View>
-        {/* buttons list */}
+
+        {/* botões placar - */}
         <View style={styles.row}>
-          <ButtonCalc disabled={(point <= 1)} onPress={() => removePonto('a')} tittle={`- ${point}`} />
-          <ButtonCalc disabled={point <= 1} onPress={() => removePonto('b')} tittle={`- ${point}`} />
+          <ButtonCalc disabled={placarA <= 0} onPress={() => removePonto('a')} tittle={`- ${point}`} />
+          <ButtonCalc disabled={placarB <= 0} onPress={() => removePonto('b')} tittle={`- ${point}`} />
         </View>
       </View>
 
-      {/* button pedir truco! */}
-
+      {/* botão pedir truco! */}
       <View style={styles.row}>
         <TextoButton disabled={point >= 12} onPress={truco} texto={BTN_CORRER[point] || ''} />
       </View>
+
+      {/* botão correr */}
       <View style={styles.row}>
         <CorrerBtn disabled={point <= 1} onPress={correu} texto={`🦆 Correu 🦆`} />
       </View>
+
+      {/* link zerar tudo */}
       <View style={styles.row}>
         <ZerarButton onPress={zerar} texto='Zerar tudo' />
       </View>

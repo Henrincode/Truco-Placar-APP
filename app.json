@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react-native-start",
-    "slug": "react-native-start",
+    "name": "Truco Placar",
+    "slug": "truco-placar",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,16 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.henrincode.trucoplacar"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "811597df-c8fa-4e01-88f5-88a714c0be67"
+      }
     }
   }
 }
