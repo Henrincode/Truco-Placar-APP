@@ -1,16 +1,18 @@
 import { StyleSheet } from "react-native";
 
+// TextoButton Styles
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        gap: 4,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         padding: 10,
-        borderRadius: 10,
-        backgroundColor: '#222'
+        borderRadius: 20,
+        backgroundColor: '#000000'
     },
-    texto: {
+    text: {
         color: 'white',
-        fontSize: 24,
+        fontSize: 40,
         textAlign: 'center'
     }
 })

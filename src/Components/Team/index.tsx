@@ -2,22 +2,22 @@ import { Text, TextInput, TextInputAndroidProps, View } from "react-native";
 import styles from "./style";
 
 interface Props extends TextInputAndroidProps {
-    nome: string,
-    setNome: (param: string) => void,
-    vitorias: number
+    team: string,
+    setTeam: (param: string) => void,
+    victories: number
 
 }
 
-export default function Team({ nome, setNome, vitorias, ...rest }: Props) {
+export default function Team({ team, setTeam, victories, ...rest }: Props) {
     return (
         <View style={styles.container}>
             <TextInput
-                style={styles.nome} {...rest} maxLength={8} selectTextOnFocus
-                onChangeText={(valor) => setNome(valor.toUpperCase())}
-                value={nome}
+                style={styles.team} {...rest} maxLength={8} selectTextOnFocus
+                onChangeText={(valor) => setTeam(valor.toUpperCase())}
+                value={team}
             />
-            <Text style={styles.vitorias}>
-                🏆 {vitorias}
+            <Text style={styles.victories}>
+                🏆 {victories}
             </Text>
         </View>
     )

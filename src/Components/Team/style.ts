@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: '#222',
     },
-    nome: {
+    team: {
         padding: 0,
         color: 'white',
         fontSize: 26,
         textAlign: 'center'
     },
-    vitorias: {
+    victories: {
         color: 'white',
         fontSize: 20,
         textAlign: 'center'

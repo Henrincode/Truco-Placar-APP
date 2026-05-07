@@ -5,7 +5,7 @@ type Props = TouchableOpacityProps & {
     tittle: string
 }
 
-export default function ButtonCalc({ tittle, ...rest }: Props) {
+export default function PointButton({ tittle, ...rest }: Props) {
     return (
         <TouchableOpacity
             {...rest}

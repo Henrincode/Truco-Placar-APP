@@ -3,14 +3,13 @@ import { StyleSheet } from "react-native";
 // TextoButton Styles
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        padding: 10,
-        borderRadius: 20,
-        backgroundColor: '#000000'
+        // flex: 1,
+        marginTop: 0,
+        marginHorizontal: 'auto'
     },
-    texto: {
+    text: {
         color: 'white',
-        fontSize: 40,
+        fontSize: 18,
         textAlign: 'center'
     }
 })
