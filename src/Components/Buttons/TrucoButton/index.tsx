@@ -1,5 +1,5 @@
-import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 import styles from "./styles";
+import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 
 const BTN_CORRER: Record<number, string> = {
     1: 'TrucooO !',

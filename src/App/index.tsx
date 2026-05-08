@@ -12,6 +12,7 @@ import { useAudioPlayer } from 'expo-audio';
 export default function App() {
 
   // hooks
+
   const [teamA, setTeamA] = useState('Time A'.toUpperCase());
   const [scoreA, setScoreA] = useState(0);
   const [victoriesA, setVictoriesA] = useState(0);
@@ -23,16 +24,18 @@ export default function App() {
   const [point, setPoint] = useState(1);
 
   // load sounds
+
   const sounds = {
     pointAdd: useAudioPlayer(require('@/assets/audio/pointAdd.wav')),
     pointRemove: useAudioPlayer(require('@/assets/audio/pointRemove.wav')),
     truco: useAudioPlayer(require('@/assets/audio/truco.wav')),
     victorie: useAudioPlayer(require('@/assets/audio/win.wav')),
     duck: useAudioPlayer(require('@/assets/audio/duck.mp3')),
-  };
+  }
 
-  // play sound
-  const playSound = (soundName: keyof typeof sounds) => {
+  // functions
+
+  function playSound(soundName: keyof typeof sounds) {
     const player = sounds[soundName];
     player.seekTo(0); // reset audio
     player.play();
@@ -48,9 +51,9 @@ export default function App() {
         `${team === 'a' ? teamA : teamB} venceu a partida`,
         `Confirmar a vitória e iniciar outra partida?`,
         [
-          // cancel btn
+          // button cancel
           { text: "Cancelar", style: "cancel" },
-          // ok btn
+          // button ok
           {
             text: "OK",
             onPress: () => {
@@ -109,38 +112,47 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+
+      {/* logo */}
       <Text style={styles.h1}>♦️ TRUCO ♦️</Text>
 
+      {/* team name and count victories */}
       <View style={styles.row}>
         <Team team={teamA} setTeam={setTeamA} victories={victoriesA} />
         <Team team={teamB} setTeam={setTeamB} victories={victoriesB} />
       </View>
 
+      {/* points */}
       <View style={styles.row}>
-        <Score tittle={scoreA} />
-        <Score tittle={scoreB} />
+        <Score score={scoreA} />
+        <Score score={scoreB} />
       </View>
 
-      <View style={styles.buttonsContainer}>
+      {/* add point buttons */}
+      <View style={styles.col}>
         <View style={styles.row}>
           <PointButton onPress={() => pointAdd('a')} tittle={`+ ${point}`} />
           <PointButton onPress={() => pointAdd('b')} tittle={`+ ${point}`} />
         </View>
 
+        {/* remove point buttons */}
         <View style={styles.row}>
           <PointButton disabled={scoreA <= 0} onPress={() => pointRemove('a')} tittle={`- ${point}`} />
           <PointButton disabled={scoreB <= 0} onPress={() => pointRemove('b')} tittle={`- ${point}`} />
         </View>
       </View>
 
+      {/* truco button */}
       <View style={styles.row}>
         <TrucoButton disabled={point >= 12} onPress={truco} point={point} />
       </View>
 
+      {/* escape button */}
       <View style={styles.row}>
         <EscapeButton disabled={point <= 1} onPress={escape} />
       </View>
 
+      {/* reset buttons */}
       <View style={styles.row}>
         <ResetButton onPress={reset} />
       </View>
