@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { ReactNode } from "react";
-import { KeyboardAvoidingView, Platform, ScrollView, StyleProp, View, ViewStyle } from "react-native";
+import { ScrollView, StyleProp, View, ViewStyle } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface Props {
@@ -18,7 +19,7 @@ export default function ScrollContainer({ children, style = {} }: Props) {
 
             {/* KEYBOARDAVOIDINGVIEW: Faz o conteúdo "pular" para cima do teclado */}
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                behavior="padding"
                 style={{ flex: 1 }}
             >
 
